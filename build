@@ -1,0 +1,11 @@
+#! /bin/bash
+
+echo "Assembling binaries..."
+
+gcc -Wall -Werror -fsanitize=address -o image ./src/*.c -I./include -lm
+
+echo "Writing scene to file..."
+
+./image >scene.ppm
+
+echo "Done!"
