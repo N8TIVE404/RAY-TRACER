@@ -4,6 +4,7 @@
 # include <vector.h>
 # include <stdbool.h>
 # include <ray.h>
+# include <hits.h>
 
 typedef Vector Point;
 
@@ -13,6 +14,7 @@ typedef struct Sphere{
 } Sphere;
 
 Sphere construct_sphere(Point, float);
-float sphere_hit(Sphere, Ray);
+Object sphere_object(Sphere*);
+bool sphere_hit(const void*, Ray, float, float, HitRecord*);
 
 # endif

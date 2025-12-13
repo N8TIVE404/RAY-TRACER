@@ -7,6 +7,6 @@
 
 typedef Vector Color;
 
-Color color_ray(Sphere, Ray);
+Color color_ray(const World*, Ray, float, float, HitRecord*);
 
 # endif
