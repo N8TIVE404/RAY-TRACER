@@ -1,7 +1,6 @@
 # ifndef HITS_H
 # define HITS_H
 
-# include <vector.h>
 # include <ray.h>
 
 typedef struct HitRecord{
@@ -9,6 +8,7 @@ typedef struct HitRecord{
     bool frontFace;
     Vector point;
     Vector center;
+    Vector normal;
 } HitRecord;
 
 typedef struct Object{

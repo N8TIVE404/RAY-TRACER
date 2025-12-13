@@ -31,6 +31,11 @@ bool sphere_hit(const void *object, Ray ray, float tMax, float tMin, HitRecord *
 
     record -> distance = (-b - sqrt(discriminant)) / (2.0 * a);
     record -> center = sphere -> center;
+    record -> point = at(ray, record -> distance);
+    Vector n = scalar_divide(sub_vectors(record -> point, sphere -> center), sphere -> radius);
+
+    record -> frontFace = dot_product(n, ray.direction) < 0.0;
+    record -> normal = record -> frontFace ? n : scalar_multiply(n, -1.0);
     
     return true;
 }

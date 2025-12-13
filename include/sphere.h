@@ -1,9 +1,6 @@
 # ifndef SPHERE_H
 # define SPHERE_H
 
-# include <vector.h>
-# include <stdbool.h>
-# include <ray.h>
 # include <hits.h>
 
 typedef Vector Point;

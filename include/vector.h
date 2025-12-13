@@ -18,6 +18,8 @@ Vector scalar_divide(Vector, float);
 Vector addf_vector(Vector, float);
 Vector subf_vector(Vector, float);
 
+float random_float();
+Vector random_vector();
 void print_vector(Vector);
 
 void add_assign(Vector*, const Vector*);
@@ -31,6 +33,8 @@ float dot_product(Vector, Vector);
 Vector cross_product(Vector, Vector);
 void make_unit(Vector*);
 Vector unit_vector(Vector a);
+Vector random_unit_vector();
+Vector random_unit_vector_in_hemisphere(Vector);
 
 float length(Vector);
 float squared_length(Vector);

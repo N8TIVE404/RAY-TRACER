@@ -1,6 +1,7 @@
 # include <vector.h>
 # include <math.h>
 # include <stdio.h>
+# include <stdlib.h>
 
 Vector construct_vector(float x, float y, float z){
     Vector vec;
@@ -31,6 +32,16 @@ Vector multiply(Vector a, Vector b){
 Vector scalar_multiply(Vector a, float f){
     return construct_vector(a.x * f, a.y * f, a.z * f);
 }
+
+float random_float(){
+    double num = drand48() * 2.0;
+    return num - 1.0;
+}
+
+Vector random_vector(){
+    return construct_vector(drand48(), drand48(), drand48());
+}
+
 
 Vector divide(Vector a, Vector b){
     return construct_vector(a.x / b.x, a.y / b.y, a.z / b.z);
@@ -105,4 +116,22 @@ Vector cross_product(Vector a, Vector b){
 
 Vector unit_vector(Vector a){
     return scalar_divide(a, length(a));
+}
+
+Vector random_unit_vector(){
+    while(true){
+        Vector vec = construct_vector(random_float(), random_float(), random_float());
+        float p = squared_length(vec);
+
+        if(1e-160 < p && p <= 1) return scalar_divide(vec, sqrt(p));
+    }
+}
+
+Vector random_unit_vector_in_hemisphere(Vector normal){
+    Vector vec = random_unit_vector();
+    if(dot_product(vec, normal) > 0.0){
+        return vec;
+    }
+
+    return scalar_multiply(vec, -1.0);
 }

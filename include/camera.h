@@ -5,6 +5,7 @@
 
 typedef struct Camera{
     float focalLength;
+    int samplesPerPixel;
     float aspectRatio;
     int width, height;
     float viewPortWidth, viewPortHeight;
@@ -15,5 +16,6 @@ typedef struct Camera{
 } Camera;
 
 Camera initialize_camera(float, float, int, float);
+void render(Camera, const void*);
 
 # endif
