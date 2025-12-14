@@ -1,4 +1,5 @@
 # include <sphere.h>
+# include <hits.h>
 # include <math.h>
 
 Sphere construct_sphere(Point center, float radius){
@@ -31,6 +32,10 @@ bool sphere_hit(const void *object, Ray ray, float tMax, float tMin, HitRecord *
 
     record -> distance = (-b - sqrt(discriminant)) / (2.0 * a);
     record -> center = sphere -> center;
+    record -> point = at(ray, record -> distance);
+    Vector normal = sub_vectors(record -> point, record -> center);
+    record -> frontFace = dot_product(normal, ray.direction) < 0.0;
+    record -> normal = record -> frontFace ? normal : scalar_multiply(normal, -1.0);
     
     return true;
 }

@@ -1,5 +1,8 @@
 # include <vector.h>
+# include <hits.h>
 # include <math.h>
+# include <stdlib.h>
+# include <time.h>
 # include <stdio.h>
 
 Vector construct_vector(float x, float y, float z){
@@ -105,4 +108,30 @@ Vector cross_product(Vector a, Vector b){
 
 Vector unit_vector(Vector a){
     return scalar_divide(a, length(a));
+}
+
+
+float random_float(){
+    return (drand48() * 2) - 1.0;
+}
+
+Vector random_vector(){
+    srand(time(NULL));
+    return construct_vector(random_float(), random_float(), random_float());
+}
+
+Vector random_unit_vector(){
+    while(true){
+        Vector p = random_vector();
+        float squaredLength = squared_length(p);
+        if(1e-160 < squaredLength && squaredLength <= 1.0){
+            return scalar_divide(p, sqrt(squaredLength));
+        }
+    }
+}
+
+Vector random_vector_on_hemisphere(HitRecord *record){
+    Vector vec = random_unit_vector();
+    if(dot_product(record -> normal, vec) > 0.0) return vec;
+    return scalar_multiply(vec, -1.0);
 }

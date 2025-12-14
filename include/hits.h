@@ -9,6 +9,7 @@ typedef struct HitRecord{
     bool frontFace;
     Vector point;
     Vector center;
+    Vector normal;
 } HitRecord;
 
 typedef struct Object{

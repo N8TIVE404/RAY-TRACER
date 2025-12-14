@@ -3,6 +3,8 @@
 
 # include <stdbool.h>
 
+struct HitRecord;
+
 typedef struct Vector{
     float x, y, z;
 } Vector;
@@ -31,6 +33,11 @@ float dot_product(Vector, Vector);
 Vector cross_product(Vector, Vector);
 void make_unit(Vector*);
 Vector unit_vector(Vector a);
+
+Vector random_vector();
+Vector random_unit_vector();
+Vector random_vector_on_hemisphere(struct HitRecord*);
+float random_float();
 
 float length(Vector);
 float squared_length(Vector);

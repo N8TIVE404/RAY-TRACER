@@ -1,9 +1,14 @@
 # include <camera.h>
+# include <hits.h>
+# include <color.h>
+# include <stdio.h>
 
 Camera initialize_camera(float focalLength, float aspectRatio, int width, float viewPortWidth){
     Camera camera;
     camera.focalLength = focalLength;
     camera.aspectRatio = aspectRatio;
+    camera.samplesPerPixel = 10;
+    camera.depth = 50;
     camera.width = width;
 
     int height = width / aspectRatio;
@@ -25,4 +30,24 @@ Camera initialize_camera(float focalLength, float aspectRatio, int width, float 
                                     scalar_multiply(camera.pixelDeltaU, 0.5));
 
     return camera;
+}
+
+void render(Camera *cam, const World *world){
+    printf("P3\n%d %d\n255\n", cam -> width, cam -> height);
+    float max = 10000000.0;
+    float min = 1e-160;
+    HitRecord record;
+
+    for(int i = 0; i < cam -> height; i++){
+        for(int j = 0; j < cam -> width; j++){
+            Color color = {.x = 0.0, .y = 0.0, .z = 0.0};
+            for(int samples = 0; samples < cam -> samplesPerPixel; samples++){
+                Ray ray = get_ray(cam, i, j);
+                Color c = color_ray(world, cam -> depth, ray, max, min, &record);
+                add_assign(&color, &c);
+            }
+
+            print_pixel(scalar_divide(color, cam -> samplesPerPixel));
+        }
+    }
 }

@@ -3,9 +3,12 @@
 
 # include <vector.h>
 
+struct World;
+
 typedef struct Camera{
     float focalLength;
     float aspectRatio;
+    int samplesPerPixel, depth;
     int width, height;
     float viewPortWidth, viewPortHeight;
     Vector center;
@@ -15,5 +18,6 @@ typedef struct Camera{
 } Camera;
 
 Camera initialize_camera(float, float, int, float);
+void render(Camera*, const struct World*);
 
 # endif

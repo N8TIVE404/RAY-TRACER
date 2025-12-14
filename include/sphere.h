@@ -2,9 +2,10 @@
 # define SPHERE_H
 
 # include <vector.h>
-# include <stdbool.h>
 # include <ray.h>
-# include <hits.h>
+
+struct Object;
+struct HitRecord;
 
 typedef Vector Point;
 
@@ -14,7 +15,7 @@ typedef struct Sphere{
 } Sphere;
 
 Sphere construct_sphere(Point, float);
-Object sphere_object(Sphere*);
-bool sphere_hit(const void*, Ray, float, float, HitRecord*);
+struct Object sphere_object(Sphere*);
+bool sphere_hit(const void*, Ray, float, float, struct HitRecord*);
 
 # endif
